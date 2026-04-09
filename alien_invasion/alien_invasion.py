@@ -27,19 +27,25 @@ class AlienInvasion:
         pygame.display.set_caption("Alien Invasion")
         # 创建一个用于存储游戏统计信息的实例
         self.stats = GameStats(self)
+        
         self.ship = Ship(self)
         self.bullets = pygame.sprite.Group()
         self.aliens = pygame.sprite.Group()
-
+        # 游戏启动后处于活动状态
+        self.game_active = True
+        
         self._create_fleet()
 
     def run_game(self):
         """开始游戏的主循环"""
         while True:
             self._check_events()
-            self.ship.update()
-            self._update_bullets()
-            self._update_aliens()
+            
+            if self.game_active:
+                self.ship.update()
+                self._update_bullets()
+                self._update_aliens()
+
             self._update_screen()
             self.clock.tick(60)
 
@@ -105,6 +111,35 @@ class AlienInvasion:
             self.bullets.empty()
             self._create_fleet()         
 
+    def _ship_hit(self):
+        """响应飞船与外星人的碰撞"""
+        # ship_left -1
+        if self.settings.ship_left > 0:
+            self.settings.ship_left -= 1
+
+            # 清空外星人编组和子弹编组
+            self.bullets.empty()
+            self.aliens.empty()
+
+            # 创建新的外星舰队， 并将飞船置于屏幕底部中央
+            self._create_fleet()
+            self.ship.centre_ship()
+
+            # 暂停
+            sleep(0.5)
+        else:
+            self.game_active = False
+
+
+    def _check_aliens_bottom(self):
+        """检测是否有外星人到达了屏幕的底部边缘"""
+        for alien in self.aliens.sprites:
+            if alien.rect.bottom >= self.settings.screen_height:
+                # 操作与飞船与外星人碰撞相同
+                self._ship_hit()
+                break
+
+
     def _update_aliens(self):
         """更新外形舰队中所有外星人的位置"""
         self._check_fleet_edges()
@@ -112,7 +147,10 @@ class AlienInvasion:
 
         # 检测外星人与飞船之间的碰撞
         if pygame.sprite.spritecollideany(self.ship, self.aliens):
-            print("Ship hit!!!")
+            self._ship_hit()
+
+        # 检查是否有外形人到达屏幕的下边缘
+        self._check_aliens_bottom()
 
     def _create_fleet(self):
         """创建一个外形舰队"""
