@@ -2,10 +2,8 @@ import pygame.font
 from pygame.sprite import Group
 from ship import Ship
 
-
 class ScoreBoard:
     """显示得分信息的类"""
-
     def __init__(self, ai_game):
         """初始化得分属性相关的设置"""
         self.ai_game = ai_game
@@ -28,10 +26,9 @@ class ScoreBoard:
         """将得分渲染为图像"""
         rounded_score = round(self.stats.score, -1)
         score_str = f"{rounded_score:,}"
-        self.score_image = self.font.render(
-            score_str, True, self.text_color, self.settings.bg_color
-        )
-
+        self.score_image = self.font.render(score_str, True,
+            self.text_color, self.settings.bg_color)
+        
         # 在屏幕右上角显示得分
         self.score_rect = self.score_image.get_rect()
         self.score_rect.right = self.screen_rect.right - 20
@@ -40,11 +37,10 @@ class ScoreBoard:
     def prep_high_score(self):
         """将最高分渲染成图像"""
         rounded_high_score = round(self.stats.high_score, -1)
-        high_score_str = f"{rounded_high_score:,}"
-        self.high_score_image = self.font.render(
-            high_score_str, True, self.text_color, self.settings.bg_color
-        )
-
+        self.high_score_str = f"{rounded_high_score:,}"
+        self.high_score_image = self.font.render(self.high_score_str, True,
+            self.text_color, self.settings.bg_color)
+        
         # 将最高分放在屏幕顶部的中央
         self.high_score_rect = self.high_score_image.get_rect()
         self.high_score_rect.centerx = self.screen_rect.centerx
@@ -53,11 +49,10 @@ class ScoreBoard:
     def prep_level(self):
         """将等级渲染成图像"""
         level_str = str(self.stats.level)
-        self.level_image = self.font.render(
-            level_str, True, self.text_color, self.settings.bg_color
-        )
-
-        # 将等级放在得分的下面
+        self.level_image = self.font.render(level_str, True, 
+            self.text_color, self.settings.bg_color)
+        
+        """将等级放在得分的下面"""
         self.level_rect = self.level_image.get_rect()
         self.level_rect.right = self.score_rect.right
         self.level_rect.top = self.score_rect.bottom + 10
@@ -82,4 +77,4 @@ class ScoreBoard:
         """检测是否出现了新的最高分"""
         if self.stats.score > self.stats.high_score:
             self.stats.high_score = self.stats.score
-            self.prep_high_score()
+        self.prep_high_score()
