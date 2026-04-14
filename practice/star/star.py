@@ -20,5 +20,3 @@ class Star(Sprite):
         """绘出一个星星的图像"""
         self.screen.fill(self.settings.bg_color)
         self.screen.blit(self.image, self.rect)
-
-

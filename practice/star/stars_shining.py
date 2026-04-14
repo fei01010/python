@@ -1,4 +1,5 @@
 import pygame
+from pygame.sprite import Group
 from star import Star
 from settings import Settings
 
@@ -22,6 +23,13 @@ class ShineStar:
 
             self.star._display_star()
             pygame.display.flip()
+
+    def _display_stars(self):
+        """显示一排排的星星"""
+        stars = pygame.sprite.Group()
+
+
+    
 
 
 if __name__ == "__main__":
