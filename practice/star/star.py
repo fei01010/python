@@ -10,13 +10,15 @@ class Star(Sprite):
         self.screen = sh.screen
         self.settings = sh.settings
 
-        image_path = Path(__file__).parent / "images" / "star.bmp"
-        self.image = pygame.image.load(str(image_path))
+        self.image = pygame.image.load("star/images_2/star.bmp")
         self.rect = self.image.get_rect()
 
         self.rect.x = self.settings.screen_width * 0.5
         self.rect.y = self.settings.screen_height * 0.5
 
-
+    def _display_star(self):
+        """绘出一个星星的图像"""
+        self.screen.fill(self.settings.bg_color)
+        self.screen.blit(self.image, self.rect)
 
 

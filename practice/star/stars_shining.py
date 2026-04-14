@@ -13,10 +13,6 @@ class ShineStar:
         pygame.display.set_caption("Shining Stars")
         self.star = Star(self)
 
-    def _display_star(self):
-        self.screen.fill(self.settings.bg_color)
-        self.screen.blit(self.star.image, self.star.rect)
-
     def run_game(self):
         while True:
             for event in pygame.event.get():
@@ -24,7 +20,7 @@ class ShineStar:
                     pygame.quit()
                     return
 
-            self._display_star()
+            self.star._display_star()
             pygame.display.flip()
 
 
