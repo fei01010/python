@@ -1,0 +1,38 @@
+# 虚拟环境文件夹（两台设备都要忽略）
+.venv/
+venv/
+env/
+ENV/
+
+# Python 缓存文件
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# IDE 配置文件（VS Code、PyCharm 等）
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 系统文件（Mac/Windows 各自的系统垃圾）
+.DS_Store
+Thumbs.db
