@@ -20,13 +20,30 @@ class ShineStar:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     return
-
-            self.star._display_star()
+            self._display_screen()
+            self._display_stars()
             pygame.display.flip()
 
     def _display_stars(self):
         """显示一排排的星星"""
-        stars = pygame.sprite.Group()
+        self.stars = pygame.sprite.Group()
+        current_x, current_y = self.settings.screen_width_restrict, self.settings.current_y
+        while current_y < (self.settings.screen_height - self.settings.screen_height_restrict):
+            while current_x < (self.settings.screen_width - self.settings.screen_width_restrict):
+                current_x += self.settings.gap
+                new_star = Star(self)
+                new_star.rect.x = current_x
+                new_star.rect.y = current_y
+                self.stars.add(new_star)
+            
+            current_x = self.settings.screen_width_restrict
+            current_y += 30
+
+        self.stars.draw(self.screen)
+
+    def _display_screen(self):
+        self.screen.fill(self.settings.bg_color)
+
 
 
     
