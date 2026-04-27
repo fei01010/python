@@ -22,7 +22,7 @@ class ShipMove:
         while True:
             self._check_event()
             self.update_screen()
-            self.clock.tick(60)
+            self.clock.tick(self.settings.fps)
 
     def _check_event(self):
         """对键盘和鼠标进行响应"""

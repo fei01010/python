@@ -32,11 +32,6 @@ class Ship:
         if self.moving_down and (self.rect.bottom < self.screen_rect.bottom):
             self.y += self.settings.ship_speed
 
-        max_x = self.screen_rect.right - self.rect.width
-        max_y = self.screen_rect.bottom - self.rect.height
-        self.x = max(0.0, min(self.x, max_x))
-        self.y = max(0.0, min(self.y, max_y))
-
         self.rect.x = self.x
         self.rect.y = self.y
 
