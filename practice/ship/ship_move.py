@@ -12,14 +12,17 @@ class ShipMove:
         self.settings = Settings()
         self.clock = pygame.time.Clock()
         self.screen = pygame.display.set_mode(
-            self.settings.screen_width, self.settings.screen_height)
-        self.ship = Ship()
-        self.status = False
+            (self.settings.screen_width, self.settings.screen_height)
+        )
+        pygame.display.set_caption("Moving your ship!")
+        self.ship = Ship(self)
 
     def run_game(self):
         """进行游戏的进程"""
-
-        self.update_screen()
+        while True:
+            self._check_event()
+            self.update_screen()
+            self.clock.tick(60)
 
     def _check_event(self):
         """对键盘和鼠标进行响应"""
@@ -29,15 +32,37 @@ class ShipMove:
             elif event.type == pygame.KEYDOWN:
                 self._check_keydown_event(event)
             elif event.type == pygame.KEYUP:
-                self._check_keyup_eevnt(event)
+                self._check_keyup_event(event)
 
     def _check_keydown_event(self, event):
-        """响应键盘按下"""
         if event.key == pygame.K_RIGHT:
-            if self.status and 
+            self.ship.moving_right = True
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = True
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = True
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = True
 
-        
+    def _check_keyup_event(self, event):
+        if event.key == pygame.K_RIGHT:
+            self.ship.moving_right = False
+        elif event.key == pygame.K_LEFT:
+            self.ship.moving_left = False
+        elif event.key == pygame.K_UP:
+            self.ship.moving_up = False
+        elif event.key == pygame.K_DOWN:
+            self.ship.moving_down = False
+            
 
     def update_screen(self):
         """更新屏幕"""
         self.screen.fill(self.settings.bg_color)
+        self.ship._update_ship()
+        self.ship.blitme()
+        pygame.display.flip()
+
+if __name__ == '__main__':
+    """创建游戏实例并开始游戏"""
+    sm_game = ShipMove()
+    sm_game.run_game()
