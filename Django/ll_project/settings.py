@@ -20,7 +20,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-9nv&_^(ipi)gg058va^#g$nj76)^@9gk+y)3nh6u&emn0!rc2h'
+SECRET_KEY = 'django-insecure-b10y_x-qev8w$5lji!#t1n(53i0qud7(s)edq$^pk^9w&m+pf='
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -34,7 +34,7 @@ INSTALLED_APPS = [
     # 我的应用程序
     'learning_logs',
 
-    # Django 默认添加的应用程序
+    # Django默认拥有的应用程序
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
